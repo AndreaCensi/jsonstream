@@ -41,7 +41,7 @@ class JSONStream(object):
             if line == '': 
                 # .. and there is trailing data in the buffer
                 if len(self.sbuffer) > 0:
-                    raise Exception, "Trailing data '%s'" % self.sbuffer
+                    raise Exception, "JSONStream: Trailing data '%s'" % self.sbuffer
                 else:
                     return None
             self.process_read(line)
