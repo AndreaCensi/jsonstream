@@ -6,7 +6,7 @@ class JSONStream(object):
     def __init__(self, stream, decoder=None):
         self.sbuffer = ''
         if decoder is None:
-            import simplejson
+            import simplejson #@UnresolvedImport
             self.decoder = simplejson.JSONDecoder()
         else:
             self.decoder = decoder
@@ -20,12 +20,12 @@ class JSONStream(object):
         while self.parsing:
             # Remove erroneus data in front of callback object
             index = self.sbuffer.find('{')
-            if index is not -1 and index is not 0:
+            if index is not - 1 and index is not 0:
                 self.sbuffer = self.sbuffer[index:]
             # Try to get a json object from the data stream
             try:
                 obj, index = self.decoder.raw_decode(self.sbuffer)
-            except Exception, e:
+            except Exception:
                 self.parsing = False
             # If we got an object, put it in the object buffer
             if self.parsing:
