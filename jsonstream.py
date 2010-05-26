@@ -40,8 +40,9 @@ class JSONStream(object):
             # if we hit EOF
             if line == '': 
                 # .. and there is trailing data in the buffer
-                if len(self.sbuffer) > 0:
-                    raise Exception, "JSONStream: Trailing data '%s'" % self.sbuffer
+                if len(self.sbuffer.strip()) > 0:
+                    raise Exception, \
+                        "JSONStream: Trailing data '%s'" % self.sbuffer
                 else:
                     return None
             self.process_read(line)
@@ -49,7 +50,8 @@ class JSONStream(object):
         # return first object from buffer
         ob = self.object_buffer[0]
         self.object_buffer = self.object_buffer[1:]
-        return ob            
+        return ob         
+   
         
 
 import sys
